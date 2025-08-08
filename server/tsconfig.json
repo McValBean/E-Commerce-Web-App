@@ -1,15 +1,5 @@
 {
-  {
-  "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "rootDir": "src",
-    "outDir": "dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
-  }
-}
+
 
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
@@ -121,4 +111,4 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   }
-}
+
