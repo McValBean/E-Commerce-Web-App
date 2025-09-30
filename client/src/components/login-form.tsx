@@ -10,18 +10,40 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-// import { useState } from "react"
+import { useState } from "react"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
 
-//    const InitialCredentialState = { email: "",
-//   password: ""
-// };
+   const InitialCredentialState = { email: "",
+  password: ""
+};
 
-// const [loginCredentials, setLoginCredentials] = useState(InitialCredentialState);
+const [loginCredentials, setLoginCredentials] = useState(InitialCredentialState);
+
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target
+    setLoginCredentials(prev => ({
+      ...prev,
+      [id]: value
+    }))
+  }
+
+const LoginSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  // Handle login logic here
+  
+  try {
+    // const res = await api.post('/api/login', loginCredentials);
+    console.log("Login successful");
+
+  }
+  catch (error) {
+    console.error("Login failed", error);
+  }
+}
 
 
   return (
@@ -34,14 +56,18 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={LoginSubmit} className="grid gap-6">
             <div className="flex flex-col gap-6">
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
                   type="email"
-                  // value={loginCredentials.email}
+                  value={loginCredentials.email}
+                  onChange={handleChange}
+                  autoCapitalize="none"
+                  autoComplete="email"
+                  autoCorrect="off"
                   placeholder="m@example.com"
                   required
                 />
@@ -49,14 +75,17 @@ export function LoginForm({
               <div className="grid gap-3">
                 <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
-                  <a
-                    href="#"
+                  <Link
+                    to="/forgot-password"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
                     Forgot your password?
-                  </a>
+                  </Link>
                 </div>
-                {/* <Input id="password" type="password" value={loginCredentials.password} required /> */}
+                <Input id="password" type="password" 
+                 value={loginCredentials.password}
+                  onChange={handleChange} 
+                required /> 
               </div>
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full">
